@@ -8,15 +8,13 @@ export default async function Home() {
   const { data: { user } } = await supabase.auth.getUser()
 
   // Obtener salas activas
-  const { data: salas, error } = await supabase
-    .from('salas')
-    .select('*')
-    .eq('activa', true)
-    .order('nombre')
+const result = await supabase
+  .from("salas")
+  .select("*");
 
-  if (error) {
-    console.error('Error al cargar salas:', error)
-  }
+console.dir(result, { depth: null });
+
+const { data: salas, error } = result;
 
 
   const listasalas = [
@@ -28,14 +26,14 @@ export default async function Home() {
 
     },
     {
-      id: 1,
+      id: 2,
       sal: "Verde",
       precio: "40€ Hora",
       placeholder: "Pequeña y espaciosa"
 
     },
     {
-      id: 1,
+      id: 3,
       sal: "Roja",
       precio: "60€ Hora",
       placeholder: "Grande y bonita"
